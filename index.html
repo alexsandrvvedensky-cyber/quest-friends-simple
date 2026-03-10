@@ -55,17 +55,25 @@
 
         function render() {
             let html = '';
-            allQuestions.forEach(q => {
-                html += '<div class="question">';
-                html += `<b>👤 ${q.author}</b><br>`;
-                html += `${q.text}<br>`;
-                q.options.forEach((opt, i) => {
-                    html += `<button class="btn" onclick="answer('${q.id}', ${i})">${String.fromCharCode(65+i)}. ${opt}</button>`;
+            
+            // ПОКАЗЫВАЕМ ВСЕ ВОПРОСЫ, КРОМЕ СВОИХ
+            let otherQuestions = allQuestions.filter(q => q.author !== user?.first_name);
+            
+            if (otherQuestions.length === 0) {
+                html = '<p>😢 Пока нет вопросов от других пользователей</p>';
+            } else {
+                otherQuestions.forEach(q => {
+                    html += '<div class="question">';
+                    html += `<b>👤 ${q.author}</b><br>`;
+                    html += `${q.text}<br>`;
+                    q.options.forEach((opt, i) => {
+                        html += `<button class="btn" onclick="answer('${q.id}', ${i})">${String.fromCharCode(65+i)}. ${opt}</button>`;
+                    });
+                    html += `<br><small>👥 ${q.answers || 0} ответов</small>`;
+                    html += '</div>';
                 });
-                html += `<br><small>👥 ${q.answers || 0} ответов</small>`;
-                html += '</div>';
-            });
-            if (!html) html = '<p>😢 Пока нет вопросов</p>';
+            }
+            
             document.getElementById('questions').innerHTML = html;
         }
 
@@ -122,6 +130,7 @@
         };
 
         render();
+        showFeed();
     </script>
 </body>
 </html>
