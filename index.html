@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Friends</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; text-align: center; background: var(--tg-theme-bg-color, #f5f5f5); color: var(--tg-theme-text-color, #222); }
+        .btn { background: var(--tg-theme-button-color, #2481cc); color: white; border: none; padding: 12px 20px; border-radius: 10px; font-size: 16px; margin: 10px; width: 90%; }
+        input, textarea { width: 90%; padding: 12px; margin: 8px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
+        .question { background: var(--tg-theme-secondary-bg-color, #fff); padding: 15px; margin: 10px 0; border-radius: 10px; text-align: left; }
+        .small { font-size: 12px; color: gray; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Quest Friends</h1>
+    <div id="userName"></div>
+    
+    <div id="feed">
+        <h3>🔥 Вопросы</h3>
+        <div id="questionsList"></div>
+        <button class="btn" onclick="showCreate()">✨ Новый вопрос</button>
+    </div>
+
+    <div id="create" style="display:none;">
+        <h3>✨ Создать вопрос</h3>
+        <textarea id="qText" placeholder="Текст вопроса" rows="2"></textarea>
+        <input id="opt0" placeholder="Вариант А">
+        <input id="opt1" placeholder="Вариант Б">
+        <input id="opt2" placeholder="Вариант В">
+        <input id="opt3" placeholder="Вариант Г">
+        <p>Правильный ответ:
+            <select id="correct">
+                <option value="0">А</option>
+                <option value="1">Б</option>
+                <option value="2">В</option>
+                <option value="3">Г</option>
+            </select>
+        </p>
+        <button class="btn" onclick="publish()">📢 Опубликовать</button>
+        <button class="btn" onclick="showFeed()">← Назад</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
